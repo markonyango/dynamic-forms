@@ -1,0 +1,6 @@
+<form class="dynamic-form" [formGroup]="form">
+    <ng-container *ngFor="let field of config;" dynamicField [config]="field" [group]="form">
+    </ng-container>
+</form>
+
+<pre><code>{{ form.value | json }}</code></pre>
