@@ -152,5 +152,8 @@
       }
     }
   },
-  "defaultProject": "ngrx-forms"
+  "defaultProject": "ngrx-forms",
+  "cli": {
+    "packageManager": "yarn"
+  }
 }

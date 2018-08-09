@@ -22,5 +22,11 @@ export class AppComponent {
       options: ['Pizza', 'Hot Dogs', 'Knakworstje', 'Coffee'],
       placeholder: 'Select an option',
     },
+    {
+      type: 'checkbox',
+      label: 'Aktiv',
+      name: 'active',
+      value: true
+    }
   ];
 }

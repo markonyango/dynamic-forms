@@ -5,13 +5,15 @@ import {
   ViewContainerRef,
   OnInit,
 } from '@angular/core';
-import { FormGroup } from '../../../../node_modules/@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { FormInputComponent } from './form-input/form-input.component';
 import { FormSelectComponent } from './form-select/form-select.component';
+import { FormCheckboxComponent } from './form-checkbox/form-checkbox.component';
 
 const components = {
   input: FormInputComponent,
   select: FormSelectComponent,
+  checkbox: FormCheckboxComponent
 };
 
 @Directive({
