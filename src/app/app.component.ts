@@ -26,7 +26,7 @@ export class AppComponent {
       type: 'checkbox',
       label: 'Aktiv',
       name: 'active',
-      value: true
-    }
+      checked: false,
+    },
   ];
 }
