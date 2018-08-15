@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { DynamicFieldConfig } from './../elements/dynamic-field-config';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -6,20 +7,51 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   templateUrl: './generic-form.component.html',
   styleUrls: ['./generic-form.component.scss'],
 })
-export class GenericFormComponent implements OnInit {
-  @Input() config: any[] = [];
+export class GenericFormComponent implements OnInit, OnChanges {
+  @Input() public config: DynamicFieldConfig[] = [];
 
-  form: FormGroup;
+  public form: FormGroup;
+
+  get controls() { return this.config.filter(({type}) => type !== 'button'); }
+  get changes() { return this.form.valueChanges; }
+  get valid() { return this.form.valid; }
+  get value() { return this.form.value; }
 
   constructor(private _fb: FormBuilder) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.form = this.createGroup();
   }
 
-  createGroup() {
+  ngOnChanges() {
+    if (this.form) {
+      const controls: string[] = Object.keys(this.form.controls);
+      const configControls: string[] = this.controls.map((item) => item.name);
+
+      controls
+        .filter((control) => !configControls.includes(control))
+        .forEach((control) => this.form.removeControl(control));
+
+      configControls
+        .filter((control) => !controls.includes(control))
+        .forEach((name) => {
+          const config = this.config.find((control) => control.name === name);
+          this.form.addControl(name, this.createControl(config));
+        });
+
+    }
+  }
+
+  public createGroup() {
     const group = this._fb.group({});
-    this.config.forEach(control => group.addControl(control.name, this._fb.control(null)));
+    this.config.forEach(control => group.addControl(control.name, this.createControl(control)));
+    console.log(group, this.config);
     return group;
+  }
+
+  public createControl(config: DynamicFieldConfig) {
+    const { disabled, validation, value } = config;
+    console.log('create: ', this._fb.control({ disabled, value }, validation));
+    return this._fb.control({ disabled, value }, validation);
   }
 }

@@ -20,8 +20,7 @@ describe('FormCheckboxComponent', () => {
   });
 
   it('has correct form element', () => {
-    let element = fixture.nativeElement.querySelector('mat-checkbox') as HTMLElement;
-    expect(element.hasAttribute('checked')).toBe(true);
-    expect(element.attributes['checked']).toBe(true);
+    const element = fixture.nativeElement.querySelector('mat-checkbox') as HTMLElement;
+    expect(element).toBeTruthy();
   });
 });

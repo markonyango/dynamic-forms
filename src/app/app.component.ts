@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { DynamicFieldConfig } from './generic-form/elements/dynamic-field-config';
 
 @Component({
   selector: 'app-root',
@@ -6,9 +7,9 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'ngrx-forms';
+  public title = 'ngrx-forms';
 
-  config = [
+  public config: any = [
     {
       type: 'input',
       label: 'Full name',

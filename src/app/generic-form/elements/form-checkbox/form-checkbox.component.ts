@@ -1,28 +1,20 @@
 import { FormGroup } from '@angular/forms';
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ChangeDetectionStrategy,
-  AfterViewInit,
-} from '@angular/core';
-import { MatSelect, MatCheckbox } from '@angular/material';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { DynamicFieldConfig } from '../dynamic-field-config';
 
 @Component({
   selector: 'app-form-checkbox',
   templateUrl: './form-checkbox.component.html',
   styleUrls: ['./form-checkbox.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormCheckboxComponent implements OnInit, AfterViewInit {
-  constructor() {}
+export class FormCheckboxComponent implements OnInit {
+  public config: DynamicFieldConfig;
+  public group: FormGroup;
 
-  ngOnInit() {
+  public constructor() {}
+
+  public ngOnInit() {
     this.group.get(this.config.name).setValue(this.config.checked);
   }
-
-  ngAfterViewInit() {}
-
-  config;
-  group: FormGroup;
 }
