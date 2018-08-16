@@ -9,7 +9,7 @@ import { DynamicFieldConfig } from './generic-form/elements/dynamic-field-config
 export class AppComponent {
   public title = 'ngrx-forms';
 
-  public config: any = [
+  public config: DynamicFieldConfig[] = [
     {
       type: 'input',
       label: 'Full name',
@@ -20,6 +20,7 @@ export class AppComponent {
       type: 'select',
       label: 'Favourite food',
       name: 'food',
+      multiple: true,
       options: ['Pizza', 'Hot Dogs', 'Knakworstje', 'Coffee'],
       placeholder: 'Select an option',
     },

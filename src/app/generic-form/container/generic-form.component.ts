@@ -45,13 +45,16 @@ export class GenericFormComponent implements OnInit, OnChanges {
   public createGroup() {
     const group = this._fb.group({});
     this.config.forEach(control => group.addControl(control.name, this.createControl(control)));
-    console.log(group, this.config);
     return group;
   }
 
   public createControl(config: DynamicFieldConfig) {
-    const { disabled, validation, value } = config;
-    console.log('create: ', this._fb.control({ disabled, value }, validation));
+    const { 
+      disabled = false,
+      validation,
+      value = null
+    } = config;
+    
     return this._fb.control({ disabled, value }, validation);
   }
 }
