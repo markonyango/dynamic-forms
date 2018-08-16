@@ -31,4 +31,12 @@ export class AppComponent {
       checked: false,
     },
   ];
+
+  public addControl() {
+    this.config.push({
+      type: 'input',
+      name: 'added',
+      placeholder: 'Added'
+    })
+  }
 }

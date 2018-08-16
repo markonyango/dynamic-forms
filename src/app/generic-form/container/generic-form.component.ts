@@ -3,7 +3,8 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'app-generic-form',
+  exportAs: 'dynamicForm',
+  selector: 'dynamic-form',
   templateUrl: './generic-form.component.html',
   styleUrls: ['./generic-form.component.scss'],
 })
@@ -23,7 +24,7 @@ export class GenericFormComponent implements OnInit, OnChanges {
     this.form = this.createGroup();
   }
 
-  ngOnChanges() {
+  public ngOnChanges() {
     if (this.form) {
       const controls: string[] = Object.keys(this.form.controls);
       const configControls: string[] = this.controls.map((item) => item.name);
@@ -38,7 +39,7 @@ export class GenericFormComponent implements OnInit, OnChanges {
           const config = this.config.find((control) => control.name === name);
           this.form.addControl(name, this.createControl(config));
         });
-
+        console.log(this.form);
     }
   }
 

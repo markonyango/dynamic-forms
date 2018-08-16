@@ -5,6 +5,7 @@ import {
   ViewContainerRef,
   OnInit,
   ComponentRef,
+  OnChanges,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormInputComponent } from './form-input/form-input.component';
@@ -23,7 +24,7 @@ const components = {
   // tslint:disable-next-line:directive-selector
   selector: '[dynamicField]',
 })
-export class DynamicFieldDirective implements OnInit {
+export class DynamicFieldDirective implements DynamicField, OnInit, OnChanges {
   @Input() public config: DynamicFieldConfig;
   @Input() public group: FormGroup;
 
@@ -42,6 +43,14 @@ export class DynamicFieldDirective implements OnInit {
   }
   
   public ngOnInit() {
+    if (!components[this.config.type]) {
+      const supportedTypes = Object.keys(components).join(', ');
+      throw new Error(
+        `Trying to use an unsupported type (${this.config.type}).
+        Supported types: ${supportedTypes}`
+      );
+    }
+
     const component = components[this.config.type];
     const factory = this.resolver.resolveComponentFactory<DynamicField>(component);
     this.component = this.container.createComponent(factory);
