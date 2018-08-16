@@ -1,7 +1,7 @@
-import { DynamicFieldConfig } from "./dynamic-field-config";
-import { FormGroup } from "@angular/forms";
+import { DynamicFieldConfig } from './dynamic-field-config';
+import { FormGroup, FormArray } from '@angular/forms';
 
 export interface DynamicField {
   config: DynamicFieldConfig;
-  group: FormGroup;
+  group: FormGroup | FormArray;
 }

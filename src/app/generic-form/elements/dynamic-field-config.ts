@@ -1,4 +1,10 @@
-import { ValidatorFn } from '@angular/forms';
+import { ValidatorFn, FormGroup, FormControl, FormArray } from '@angular/forms';
+
+export enum formType {
+  formGroup = 'FormGroup',
+  formControl = 'FormControl',
+  formArray = 'FormArray'
+}
 
 export interface DynamicFieldConfig {
   disabled?: boolean;
@@ -11,4 +17,5 @@ export interface DynamicFieldConfig {
   value?: any;
   multiple?: boolean;
   checked?: boolean;
+  formType?: string;
 }
