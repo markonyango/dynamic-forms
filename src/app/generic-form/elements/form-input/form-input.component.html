@@ -1,4 +1,4 @@
-<ng-container *ngIf="!isFormArray(group)">
+<ng-container *ngIf="!isFormArray(group); else FORMARRAY">
   <div [formGroup]="group">
     <mat-form-field>
       <mat-label>{{ config.label }}</mat-label>
@@ -11,7 +11,7 @@
   </div>
 </ng-container>
 
-<ng-container *ngIf="isFormArray(group)">
+<ng-template #FORMARRAY>
   <div [formGroup]="group">
     <mat-expansion-panel>
       <mat-expansion-panel-header>{{config.label}}</mat-expansion-panel-header>
@@ -26,4 +26,4 @@
       </div>
       </mat-expansion-panel>
   </div>
-</ng-container>
+</ng-template>
