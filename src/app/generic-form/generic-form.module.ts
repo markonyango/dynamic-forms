@@ -8,16 +8,27 @@ import { FormSelectComponent } from './elements/form-select/form-select.componen
 import { DynamicFieldDirective } from './elements/dynamic-field.directive';
 import { MaterialModule } from '../material/material.module';
 import { FormCheckboxComponent } from './elements/form-checkbox/form-checkbox.component';
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './generic-form.reducer';
+import { GenericFormDirective } from './generic-form.directive';
+import { Actions } from '@ngrx/effects';
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, MaterialModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    StoreModule.forFeature('genericForm', reducer)
+  ],
   declarations: [
     DynamicFieldDirective,
     GenericFormComponent,
     FormInputComponent,
     FormSelectComponent,
     FormCheckboxComponent,
+    GenericFormDirective,
   ],
+  providers: [Actions],
   exports: [GenericFormComponent],
   entryComponents: [FormInputComponent, FormSelectComponent, FormCheckboxComponent],
 })

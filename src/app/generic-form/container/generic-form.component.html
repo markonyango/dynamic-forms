@@ -1,4 +1,6 @@
-<form class="dynamic-form" [formGroup]="form">
+<form [connectForm]="formID" class="dynamic-form" [formGroup]="form">
     <ng-container *ngFor="let field of config;" dynamicField [config]="field" [group]="form">
     </ng-container>
 </form>
+
+<pre><code>{{ forms$ | async | json }}</code></pre>

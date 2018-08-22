@@ -50,12 +50,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     }];
   }
 
-  public ngAfterViewInit() {
-    this.form.changes.pipe().subscribe(res => {
-      // console.log(res);
-      console.log(this.form.form);
-    });
-  }
+  public ngAfterViewInit() { }
 
   public ngOnInit() { }
 }
