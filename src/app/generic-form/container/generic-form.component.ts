@@ -1,14 +1,15 @@
 import { DynamicFieldConfig, formType } from './../elements/dynamic-field-config';
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ViewContainerRef } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { State, Store, select } from '@ngrx/store';
-import { AddOne, UpdateValueAction } from '../generic-form.actions';
+import { Store } from '@ngrx/store';
+import { AddOne, UpdateValue, RemoveOne } from '../generic-form.actions';
+import * as fromFormReducer from '../generic-form.reducer';
 
 @Component({
   exportAs: 'dynamicForm',
   selector: 'dynamic-form',
   templateUrl: './generic-form.component.html',
-  styleUrls: ['./generic-form.component.scss'],
+  styleUrls: ['./generic-form.component.scss']
 })
 export class GenericFormComponent implements OnInit, OnChanges {
   @Input()
@@ -50,17 +51,15 @@ export class GenericFormComponent implements OnInit, OnChanges {
     });
   }
 
-  constructor(private _fb: FormBuilder, private _store: Store<any>) {}
+  constructor(
+    private _fb: FormBuilder,
+    private _store: Store<any>,
+  ) {}
 
   public ngOnInit() {
     this.form = this.createGroup();
 
-    this._store.dispatch(
-      new AddOne(
-        this.formID,
-        this.form.value,
-      )
-    );
+    this._store.dispatch(new AddOne(this.formID, this.form.value));
   }
 
   public ngOnChanges() {
@@ -76,7 +75,7 @@ export class GenericFormComponent implements OnInit, OnChanges {
         const config = this.config.find(control => control.name === name);
         this.form.addControl(name, this.createControl(config));
       });
-      this._store.dispatch(new UpdateValueAction(this.formID, this.form.value));
+      this._store.dispatch(new UpdateValue(this.formID, this.form.value));
     }
   }
 
@@ -99,5 +98,9 @@ export class GenericFormComponent implements OnInit, OnChanges {
       default:
         return this._fb.control({ disabled, value }, validation);
     }
+  }
+
+  public remove(id) {
+    this._store.dispatch(new RemoveOne(id));
   }
 }

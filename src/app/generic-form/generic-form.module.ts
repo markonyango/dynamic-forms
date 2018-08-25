@@ -26,10 +26,10 @@ import { Actions } from '@ngrx/effects';
     FormInputComponent,
     FormSelectComponent,
     FormCheckboxComponent,
-    GenericFormDirective,
+    GenericFormDirective
   ],
   providers: [Actions],
   exports: [GenericFormComponent],
-  entryComponents: [FormInputComponent, FormSelectComponent, FormCheckboxComponent],
+  entryComponents: [FormInputComponent, FormSelectComponent, FormCheckboxComponent]
 })
 export class GenericFormModule {}

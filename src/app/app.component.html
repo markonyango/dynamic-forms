@@ -2,8 +2,7 @@
     <dynamic-form formID="formone" #form="dynamicForm" [config]="config"></dynamic-form>
 </div>
 
-<pre><code>{{ form.value | json }}</code></pre>
 <button mat-raised-button (click)="addControl()">Add</button>
+<button mat-raised-button (click)="form.remove('formone')" color="warn">Delete Form</button>
 
-<dynamic-form formID="forma" #forma="dynamicForm" [config]="config"></dynamic-form>
-<pre><code>{{ forma.value | json }}</code></pre>
+<pre><code>{{ formState | async | json }}</code></pre>
