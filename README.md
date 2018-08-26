@@ -1,27 +1,43 @@
-# NgrxForms
+# ngx-forms
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.2.
+This project is based on the Dynamic Form generator by Todd Motto and the works of Netanel Basal. By providing a configuration array of element configuration objects
+to the module it will yield a fully styled (Material) form with. 
 
-## Development server
+```
+public config: any = [
+    {
+      type: 'input',
+      label: 'Full name',
+      name: 'name',
+      placeholder: 'Enter your name',
+      validation: [
+        Validators.compose([
+          Validators.required, Validators.maxLength(5)
+        ])
+      ]
+    },
+    {
+      type: 'select',
+      label: 'Favourite programming language',
+      name: 'programming_language',
+      multiple: true,
+      options: ['JavaScript', 'C/C++', 'Java', 'other'],
+      placeholder: 'Select an option'
+    },
+    {
+      type: 'checkbox',
+      label: 'Active',
+      name: 'active',
+      checked: false
+    }
+  ];
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+To validate a form field, simply make use of Angulars own Validators module and compose a Validator as seen above.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Furthermore, the generated form will be available in the @ngrx/store and automatically update its value with each keystroke. There is no limit to how many forms can exist in parallel at any time (each form requires a unique id which needs to be provided).
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `yarn build ngx-forms` or `npm build ngx-forms` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
