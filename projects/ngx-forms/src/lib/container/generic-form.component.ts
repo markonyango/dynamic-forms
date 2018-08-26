@@ -1,12 +1,13 @@
 import { DynamicFieldConfig, formType } from './../elements/dynamic-field-config';
-import { Component, OnInit, Input, OnChanges, ViewContainerRef } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AddOne, UpdateValue, RemoveOne } from '../generic-form.actions';
-import * as fromFormReducer from '../generic-form.reducer';
+import { Observable } from 'rxjs';
 
 @Component({
   exportAs: 'dynamicForm',
+  // tslint:disable-next-line:component-selector
   selector: 'dynamic-form',
   templateUrl: './generic-form.component.html',
   styleUrls: ['./generic-form.component.scss']
@@ -23,7 +24,7 @@ export class GenericFormComponent implements OnInit, OnChanges {
   get controls() {
     return this.config.filter(({ type }) => type !== 'button');
   }
-  get changes() {
+  get changes(): Observable<any> {
     return this.form.valueChanges;
   }
   get valid() {
@@ -85,7 +86,7 @@ export class GenericFormComponent implements OnInit, OnChanges {
     return group;
   }
 
-  public createControl(config: DynamicFieldConfig) {
+  public createControl(config: DynamicFieldConfig): FormControl | FormArray | FormGroup {
     const { disabled, validation, value } = config;
 
     switch (config.formType) {
@@ -100,7 +101,7 @@ export class GenericFormComponent implements OnInit, OnChanges {
     }
   }
 
-  public remove(id) {
+  public remove(id): void {
     this._store.dispatch(new RemoveOne(id));
   }
 }

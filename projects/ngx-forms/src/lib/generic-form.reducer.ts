@@ -1,15 +1,17 @@
 import { GenericFormActionTypes, Actions } from './generic-form.actions';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector, MemoizedSelector } from '@ngrx/store';
 
 export interface GenericForm {
-  [formID: string]: {
-    id: string | number;
-    loading: boolean;
-    loaded: boolean;
-    failed: boolean;
-    value: any;
-    errors: {};
-  };
+  [formID: string]: GenericFormState;
+}
+
+export interface GenericFormState {
+  id: string | number;
+  loading: boolean;
+  loaded: boolean;
+  failed: boolean;
+  value: any;
+  errors: {};
 }
 
 const INITIAL_STATE: GenericForm = {};
@@ -53,7 +55,8 @@ export function reducer(state: GenericForm = INITIAL_STATE, action: Actions): Ge
   }
 }
 
+export const getAllForms: MemoizedSelector<any, GenericFormState> =
+  createFeatureSelector<GenericFormState>('genericForm');
 
-export const getAllForms = createFeatureSelector<GenericForm>('genericForm');
-
-export const getFormByID = (id) => createSelector(getAllForms, (forms) => forms[id]);
+export const getFormByID = (id: string | number): MemoizedSelector<GenericFormState, string | number> =>
+  createSelector(getAllForms, forms => forms[id]);

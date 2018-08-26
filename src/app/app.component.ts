@@ -5,11 +5,8 @@ import {
   ViewChild,
   AfterViewInit
 } from '@angular/core';
-import { DynamicFieldConfig } from './generic-form/elements/dynamic-field-config';
 import { Validators } from '@angular/forms';
-import { GenericFormComponent } from './generic-form/container/generic-form.component';
 import { Store, select } from '@ngrx/store';
-import { getAllForms } from './generic-form/generic-form.reducer';
 
 @Component({
   selector: 'app-root',
@@ -21,9 +18,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   public formState: any;
 
   @ViewChild('form')
-  public form: GenericFormComponent;
+  public form;
 
-  public config: DynamicFieldConfig[] = [
+  public config: any = [
     {
       type: 'input',
       label: 'Full name',
@@ -50,8 +47,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   ];
 
   public constructor(public store: Store<any>) {
-    this.formState = this.store.pipe(select(getAllForms));
-  }
+    this.formState = this.store.select('genericForm');
+   }
 
   public addControl() {
     this.config = [

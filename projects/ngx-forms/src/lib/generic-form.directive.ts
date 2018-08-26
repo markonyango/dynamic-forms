@@ -6,6 +6,7 @@ import { GenericForm } from './generic-form.reducer';
 import * as fromFormActions from './generic-form.actions';
 
 @Directive({
+  // tslint:disable-next-line:directive-selector
   selector: '[connectForm]',
 })
 export class GenericFormDirective implements OnInit {
