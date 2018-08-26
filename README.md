@@ -1,7 +1,7 @@
 # ngx-forms
 
 This project is based on the Dynamic Form generator by Todd Motto and the works of Netanel Basal. By providing a configuration array of element configuration objects
-to the module it will yield a fully styled (Material) form with. 
+to the module it will yield a fully styled (Material) form. 
 
 ```
 public config: any = [
