@@ -1,0 +1,8 @@
+<div class="app">
+    <dynamic-form formID="formone" #form="dynamicForm" [config]="config"></dynamic-form>
+</div>
+
+<button mat-raised-button (click)="addControl()">Add</button>
+<button mat-raised-button (click)="form.remove('formone')" color="warn">Delete Form</button>
+
+<pre><code>{{ formState | async | json }}</code></pre>

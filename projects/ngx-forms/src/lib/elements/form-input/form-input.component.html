@@ -1,0 +1,29 @@
+<ng-container *ngIf="!isFormArray(group); else FORMARRAY">
+  <div [formGroup]="group">
+    <mat-form-field>
+      <mat-label>{{ config.label }}</mat-label>
+      <input matInput [placeholder]="config.placeholder" [formControlName]="config.name" />
+      <mat-error *ngIf="group.get(config.name).hasError('required')">Pflichtfeld</mat-error>
+      <mat-error *ngIf="group.get(config.name).hasError('maxlength')">Maximal Länge {{ group.get(config.name).errors['maxlength']['requiredLength'] }}</mat-error>
+      <mat-error *ngIf="group.get(config.name).hasError('minlength')">Minimale Länge {{ group.get(config.name).errors['maxlength']['requiredLength'] }}</mat-error>
+      <mat-error *ngIf="group.get(config.name).hasError('email')">Keine gültige E-Mail Adresse</mat-error>
+    </mat-form-field>
+  </div>
+</ng-container>
+
+<ng-template #FORMARRAY>
+  <div [formGroup]="group">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>{{config.label}}</mat-expansion-panel-header>
+        <div [formArrayName]="config.name" class="form-field-array">
+        <mat-form-field *ngFor="let ctrl of config.value; index as i">
+          <input matInput [formControlName]="i" />
+          <mat-error *ngIf="group.get(config.name).hasError('required')">Pflichtfeld</mat-error>
+          <mat-error *ngIf="group.get(config.name).hasError('maxlength')">Maximal Länge {{ group.get(config.name).errors['maxlength']['requiredLength'] }}</mat-error>
+          <mat-error *ngIf="group.get(config.name).hasError('minlength')">Minimale Länge {{ group.get(config.name).errors['maxlength']['requiredLength'] }}</mat-error>
+          <mat-error *ngIf="group.get(config.name).hasError('email')">Keine gültige E-Mail Adresse</mat-error>
+        </mat-form-field>
+      </div>
+      </mat-expansion-panel>
+  </div>
+</ng-template>

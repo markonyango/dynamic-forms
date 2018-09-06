@@ -1,0 +1,28 @@
+{
+  "name": "ngx-forms",
+  "author": {
+    "name": "Mark Onyango",
+    "email": "ngx.forms@gmail.com",
+    "url": "https://github.com/markonyango"
+  },
+  "description": "Dynamic Angular Forms with ngrx",
+  "version": "0.0.1",
+  "keywords": [
+    "angular",
+    "ngrx",
+    "forms",
+    "material"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/markonyango/ngx-forms.git"
+  },
+  "peerDependencies": {
+    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/material": "^6.4.6",
+    "@ngrx/store": "^6.1.0",
+    "rxjs": "^6.2.2"
+  }
+}
